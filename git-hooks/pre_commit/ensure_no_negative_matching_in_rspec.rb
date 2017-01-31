@@ -33,11 +33,11 @@ module Overcommit::Hook::PreCommit
     private
 
     def detect_errors
-      check_files.each do |file|
+      check_files.map do |file|
         file_contents = File.read(file)
-        MATCHERS.each do |matcher, negated_matcher|
+        MATCHERS.map do |matcher, negated_matcher|
           VERBS.map do |verb, replace_verb|
-            if file_contents.include?("not_to #{matcher}")
+            if file_contents.include?(".#{verb} #{matcher}")
               ["#{file}: contains '#{verb} #{matcher}' (can be replaced by '#{replace_verb} #{negated_matcher}')"]
             end
           end
@@ -46,7 +46,7 @@ module Overcommit::Hook::PreCommit
     end
 
     def detect_warnings
-      check_files.each do |file|
+      check_files.map do |file|
         file_contents = File.read(file)
         VERBS.keys.map do |verb|
           if file_contents.include?(".#{verb} ")
