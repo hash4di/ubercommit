@@ -17,6 +17,11 @@ module Overcommit::Hook::PreCommit
       not_to: :to,
       and_not: :and
     }.freeze
+    ENDINGS = [
+      ' ',
+      '(',
+      '{'
+    ].freeze
 
     def run
       errors = detect_errors
@@ -37,8 +42,10 @@ module Overcommit::Hook::PreCommit
         file_contents = File.read(file)
         MATCHERS.map do |matcher, negated_matcher|
           VERBS.map do |verb, replace_verb|
-            if file_contents.include?(".#{verb} #{matcher}")
-              ["#{file}: contains '#{verb} #{matcher}' (can be replaced by '#{replace_verb} #{negated_matcher}')"]
+            ENDINGS.map do |ending|
+              if file_contents.include?(".#{verb} #{matcher}#{ending}")
+                ["#{file}: contains '#{verb} #{matcher}#{ending}' (can be replaced by '#{replace_verb} #{negated_matcher}#{ending}')"]
+              end
             end
           end
         end
