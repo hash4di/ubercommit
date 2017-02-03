@@ -1,6 +1,6 @@
 module Overcommit::Hook::PreCommit
   class EnsureNoNegativeMatchingInRspec < Base
-    MATCHERS = {
+    ERROR_MATCHERS = {
       have_content: :have_no_content,
       have_text: :have_no_text,
       include: :not_include,
@@ -12,6 +12,11 @@ module Overcommit::Hook::PreCommit
       be_present: :be_blank,
       change: :not_change
     }.freeze
+    EOL_WARN_MATCHERS = {
+      be_nil: :be_present,
+      be_present: :be_empty,
+      be_empty: :be_present
+    }
     VERBS = {
       to_not: :to,
       not_to: :to,
@@ -40,11 +45,11 @@ module Overcommit::Hook::PreCommit
     def detect_errors
       check_files.map do |file|
         file_contents = File.read(file)
-        MATCHERS.map do |matcher, negated_matcher|
+        ERROR_MATCHERS.map do |matcher, negated_matcher|
           VERBS.map do |verb, replace_verb|
             ENDINGS.map do |ending|
               if file_contents.include?(".#{verb} #{matcher}#{ending}")
-                ["#{file}: contains '#{verb} #{matcher}#{ending}' (can be replaced by '#{replace_verb} #{negated_matcher}#{ending}')"]
+                message_with_suggestion(file, verb, replace_verb, matcher, negated_matcher, ending)
               end
             end
           end
@@ -55,12 +60,23 @@ module Overcommit::Hook::PreCommit
     def detect_warnings
       check_files.map do |file|
         file_contents = File.read(file)
+        VERBS.map do |verb, replace_verb|
+          EOL_WARN_MATCHERS.map do |matcher, negated_matcher|
+            if file_contents =~ /\.#{verb} #{matcher}$/
+              message_with_suggestion(file, verb, replace_verb, matcher, negated_matcher, '')
+            end
+          end
+        end +
         VERBS.keys.map do |verb|
           if file_contents.include?(".#{verb} ")
             ["#{file}: contains '.#{verb} '`"]
           end
         end
       end.flatten.compact
+    end
+
+    def message_with_suggestion(file, verb, replace_verb, matcher, negated_matcher, ending)
+      ["#{file}: contains '#{verb} #{matcher}#{ending}' (can be replaced by '#{replace_verb} #{negated_matcher}#{ending}')"]
     end
 
     def check_files
