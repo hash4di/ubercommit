@@ -1,3 +1,9 @@
+# Example configuration:
+#
+# EnsureNoRedundantBlockMethodAttributesInFiles:
+#   enabled: true
+#   include:
+#     - '**/*.rb'
 module Overcommit::Hook::PreCommit
   class EnsureNoRedundantBlockMethodAttributesInFiles < Base
     def run

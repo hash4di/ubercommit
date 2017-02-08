@@ -1,3 +1,9 @@
+# Example configuration:
+#
+# EnsureNoBindingPryInFiles:
+#   enabled: true
+#   include:
+#     - '**/*.rb'
 module Overcommit::Hook::PreCommit
   class EnsureNoBindingPryInFiles < Base
     def run

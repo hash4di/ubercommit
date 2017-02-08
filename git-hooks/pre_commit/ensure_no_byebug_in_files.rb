@@ -1,3 +1,9 @@
+# Example configuration:
+#
+# EnsureNoByebugInFiles:
+#   enabled: true
+#   include:
+#     - '**/*.rb'
 module Overcommit::Hook::PreCommit
   class EnsureNoByebugInFiles < Base
     def run

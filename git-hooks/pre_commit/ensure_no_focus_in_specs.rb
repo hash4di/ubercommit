@@ -1,3 +1,9 @@
+# Example configuration:
+#
+# EnsureNoFileExistRailsRootJoinInFiles:
+#   enabled: true
+#   include:
+#     - 'spec/**/*.rb'
 module Overcommit::Hook::PreCommit
   class EnsureNoFocusInSpecs < Base
     def run

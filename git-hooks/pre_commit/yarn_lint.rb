@@ -1,3 +1,9 @@
+# Example configuration:
+#
+# YarnLint:
+#   enabled: true
+#   include:
+#     - '**/*.js'
 module Overcommit::Hook::PreCommit
   class YarnLint < Base
     COMMAND = %w[yarn run lint].freeze

@@ -1,3 +1,9 @@
+# Example configuration:
+#
+# EnsureNoNegativeMatchingInRspec:
+#   enabled: true
+#   include:
+#     - 'spec/**/*.rb'
 module Overcommit::Hook::PreCommit
   class EnsureNoNegativeMatchingInRspec < Base
     ERROR_MATCHERS = {

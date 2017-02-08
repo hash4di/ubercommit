@@ -1,3 +1,9 @@
+# Example configuration:
+#
+# EnsureExplicitDescriptionsInRspec:
+#    enabled: true
+#    include:
+#      - 'spec/**/*.rb'
 module Overcommit::Hook::PreCommit
   class EnsureExplicitDescriptionsInRspec < Base
     BLOCK_NAMES = %i[describe context].freeze

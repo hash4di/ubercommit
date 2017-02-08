@@ -1,3 +1,9 @@
+# Example configuration:
+#
+# EnsureNoPluckIdInFiles:
+#   enabled: true
+#   include:
+#     - '**/*.rb'
 module Overcommit::Hook::PreCommit
   class EnsureNoPluckIdInFiles < Base
     def run

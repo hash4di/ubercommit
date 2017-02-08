@@ -1,3 +1,9 @@
+# Example configuration:
+#
+# EnsureNoFileExistRailsRootJoinInFiles:
+#   enabled: true
+#   include:
+#     - '**/*.rb'
 module Overcommit::Hook::PreCommit
   class EnsureNoFileExistRailsRootJoinInFiles < Base
     def run
