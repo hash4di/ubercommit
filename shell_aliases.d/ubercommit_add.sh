@@ -9,7 +9,7 @@ function ubercommit_add() {
      source $UBERCOMMIT_PATH/shell_aliases.d/ubercommit_add_file_suffix_examples.sh && \
      SKIP_EXAMPLES='$SKIP_EXAMPLES' ubercommit_add_file_suffix {}" \
     ::: \
-    sh rb && \
-      overcommit --sign pre-commit
-  return $?
+    sh rb || return $?
+
+  overcommit --sign pre-commit || return $?
 }
