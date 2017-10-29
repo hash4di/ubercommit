@@ -18,13 +18,13 @@ module Overcommit
         private
 
         def detect_errors
-          check_files.each do |file|
+          check_files.map do |file|
             next unless File.read(file) =~ /File\.exist\?.*Rails\.root\.join/
             [
               "#{file}: contains 'File.exist?(Rails.root.join(*))'",
               "(can be replaced by 'Rails.root.join(*).exist?')"
             ].join(' ')
-          end
+          end.compact
         end
 
         def check_files
