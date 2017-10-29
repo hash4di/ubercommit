@@ -10,6 +10,4 @@ function ubercommit_add() {
      SKIP_EXAMPLES='$SKIP_EXAMPLES' ubercommit_add_file_suffix {}" \
     ::: \
     sh rb || return $?
-
-  overcommit --sign pre-commit || return $?
 }
