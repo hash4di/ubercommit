@@ -20,6 +20,8 @@ source "$D_R/shell_aliases.d/UBERCOMMIT_PATH.sh" || return $?
 source "$D_R/shell_aliases.d/ubercommit_add.sh" || return $?
 # shellcheck disable=SC1090
 source "$D_R/shell_aliases.d/ubercommit_add_file_suffix.sh" || return $?
+# shellcheck disable=SC1090
+source "$D_R/shell_aliases.d/ubercommit_add_file_suffix_examples.sh" || return $?
 
 for PROJECT_DIR in "$@"
 do
