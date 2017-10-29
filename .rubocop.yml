@@ -1,0 +1,4 @@
+Metrics/LineLength:
+  Max: 101
+Metrics/MethodLength:
+  Max: 11

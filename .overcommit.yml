@@ -33,3 +33,7 @@ PreCommit:
     enabled: true
     include:
       - '**/*.rb'
+  RuboCop:
+    enabled: true
+    include:
+      - '**/*.rb'
