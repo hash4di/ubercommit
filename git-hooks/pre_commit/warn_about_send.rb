@@ -30,13 +30,13 @@ module Overcommit
         private
 
         def warnings
-          check_files.each do |file|
+          check_files.map do |file|
             file_contents = File.read(file)
             OCCURENCES.map do |occurence|
               next unless file_contents.include?(occurence)
               "#{file}: contains '#{occurence}' (can be replaced with '.public_send('"
             end.compact
-          end
+          end.flatten
         end
 
         def check_files
