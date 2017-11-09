@@ -19,7 +19,8 @@ module Overcommit
           have_link: :have_no_link,
           have_field: :have_no_field,
           be_present: :be_blank,
-          change: :not_change
+          change: :not_change,
+          render_template: :not_render_template
         }.freeze
         EOL_WARN_MATCHERS = {
           be_nil: :be_present,
