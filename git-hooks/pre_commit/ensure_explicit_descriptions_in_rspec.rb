@@ -12,15 +12,15 @@ module Overcommit
         BLOCK_NAMES = %i[describe context].freeze
 
         def run
-          errors = detect_errors
-          return :fail, errors.join("\n") unless errors.empty?
+          warnings = detect_warnings
+          return :warn, warnings.join("\n") unless warnings.empty?
 
           :pass
         end
 
         private
 
-        def detect_errors
+        def detect_warnings
           check_files.map do |file|
             file_contents = File.read(file)
             BLOCK_NAMES.map do |block_name|
