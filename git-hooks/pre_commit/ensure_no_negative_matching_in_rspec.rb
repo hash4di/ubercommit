@@ -19,6 +19,7 @@ module Overcommit
           have_link: :have_no_link,
           have_field: :have_no_field,
           be_present: :be_blank,
+          be_valid: :be_invalid,
           change: :not_change,
           render_template: :not_render_template
         }.freeze
