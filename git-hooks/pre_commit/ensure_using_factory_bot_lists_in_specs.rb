@@ -29,7 +29,7 @@ module Overcommit
                 end
               end
             end
-          end
+          end.flatten.compact
         end
       end
     end

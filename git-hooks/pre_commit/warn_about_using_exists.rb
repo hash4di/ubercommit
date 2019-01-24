@@ -24,7 +24,7 @@ module Overcommit
             if File.read(file).include?('.exists?')
               "#{file}: contains '.exists?', you may want to check if '.any?' can be used"
             end
-          end
+          end.compact
         end
       end
     end
