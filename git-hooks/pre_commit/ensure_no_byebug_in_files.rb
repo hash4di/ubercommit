@@ -25,7 +25,7 @@ module Overcommit
 
         def check_files
           applicable_files.reject do |file|
-            File.basename(file) =~ /^Gemfile|ensure_no_byebug_in_files\.rb/
+            File.basename(file) =~ /^Gemfile|.gitignore|ensure_no_byebug_in_files\.rb/
           end
         end
       end
