@@ -4,6 +4,9 @@
 #   enabled: true
 #   include:
 #     - '**/*.rb'
+#     - '**/*.slim'
+#     - '**/*.erb'
+#     - '**/*.rake'
 module Overcommit
   module Hook
     module PreCommit
